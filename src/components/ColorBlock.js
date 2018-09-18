@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Box = styled.div`
+  background-color: ${p => p.color};
   height: 150px;
   display: flex;
   align-items: center;
@@ -15,7 +16,7 @@ const BoxText = styled.p`
 
 export default ({ color, name }) => {
   return (
-    <Box style={{ backgroundColor: color }}>
+    <Box color={color}>
       <BoxText>{name}</BoxText>
     </Box>
   );
