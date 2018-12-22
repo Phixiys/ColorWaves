@@ -1,8 +1,8 @@
-const request = props => {
-  fetch("https://reqres.in/api/example?per_page=8")
+const request = (page, handleStateUpdate) => {
+  fetch(`https://reqres.in/api/example?per_page=8&page=${page}`)
     .then(res => res.json())
     .then(data =>
-      props.handleStateUpdate({
+      handleStateUpdate({
         isFetching: false,
         data
       })

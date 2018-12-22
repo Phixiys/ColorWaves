@@ -11,16 +11,21 @@ class AppProvider extends React.Component {
       this.setState(state);
     };
 
+    let self = this;
+
     this.state = {
       handleStateUpdate: this.handleStateUpdate,
 
       isFetching: false,
-      data: []
+      data: [],
+      pageLoader(page) {
+        request(2, self.state.handleStateUpdate);
+      }
     };
   }
 
   componentDidMount() {
-    request(this.state);
+    request(1, this.state.handleStateUpdate);
   }
 
   render() {

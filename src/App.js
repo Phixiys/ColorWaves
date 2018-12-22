@@ -30,7 +30,27 @@ const Grid = styled.div`
   }
 `;
 
+const Button = styled.button`
+  background-color: papayawhip;
+  border-radius: 3px;
+  box-shadow: 1px 2px 1px grey;
+  font-size: 18px;
+  padding: 20px 40px;
+  cursor: pointer;
+  border: none;
+`;
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onClick = this.onClick.bind(this);
+  }
+  onClick() {
+    console.log(this);
+    this.props.app.pageLoader(2);
+  }
+
   render() {
     const { app } = this.props;
     const colors =
@@ -46,6 +66,7 @@ class App extends Component {
           <Grid>
             <GlobalStyle />
             {colors}
+            <Button onClick={this.onClick}>KLICKA MIG!!!</Button>
           </Grid>
         </Container>
       </React.Fragment>
