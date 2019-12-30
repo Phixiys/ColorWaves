@@ -41,12 +41,7 @@ const Button = styled.button`
 `;
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onClick = this.onClick.bind(this);
-  }
-  onClick() {
+  onClick = () => {
     console.log(this);
     this.props.app.pageLoader(2);
   }
