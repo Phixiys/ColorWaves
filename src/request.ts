@@ -1,9 +1,37 @@
-import { ApiResponse, StateUpdate } from './types';
+import { ApiResponse, ColorItem, StateUpdate } from "./types";
 
-const request = (page: number, handleStateUpdate: (state: StateUpdate) => void): void => {
-  fetch(`https://reqres.in/api/example?per_page=8&page=${page}`)
-    .then(res => res.json())
-    .then((data: ApiResponse) => handleStateUpdate({ isFetching: false, data }));
+interface ColorApiScheme {
+  colors: Array<{
+    hex: { clean: string };
+    name: { value: string };
+  }>;
+}
+
+const randomHex = (): string =>
+  Math.floor(Math.random() * 0xffffff)
+    .toString(16)
+    .padStart(6, "0");
+
+const request = (
+  page: number,
+  handleStateUpdate: (state: StateUpdate) => void,
+): void => {
+  const seed = randomHex();
+  fetch(`/api/scheme?hex=${seed}&mode=analogic&count=20&format=json`)
+    .then((res) => res.json())
+    .then((scheme: ColorApiScheme) => {
+      const data: ApiResponse = {
+        data: scheme.colors.map(
+          (c, i): ColorItem => ({
+            id: i,
+            color: `#${c.hex.clean}`,
+            name: c.name.value,
+          }),
+        ),
+        page,
+      };
+      handleStateUpdate({ isFetching: false, data });
+    });
 };
 
 export default request;

@@ -1,9 +1,9 @@
-import { useContext } from 'react';
-import styled from 'styled-components';
-import ColorBlock from './components/ColorBlock';
-import GlobalStyle from './theme/GlobalStyle';
-import { device } from './theme/BreakPoints';
-import { AppContext } from './AppProvider';
+import { useContext } from "react";
+import styled from "styled-components";
+import ColorBlock from "./components/ColorBlock";
+import GlobalStyle from "./theme/GlobalStyle";
+import { device } from "./theme/BreakPoints";
+import { AppContext } from "./AppProvider";
 
 const Title = styled.h1`
   text-align: center;
@@ -33,7 +33,7 @@ const Grid = styled.div`
 
 const Button = styled.button`
   background-color: papayawhip;
-  border-radius: 3px;
+  border-radius: 6px;
   box-shadow: 1px 2px 1px grey;
   font-size: 18px;
   padding: 20px 40px;
@@ -48,7 +48,7 @@ const App: React.FC = () => {
     app?.pageLoader(2);
   };
 
-  const colors = app?.data.data?.map(item => (
+  const colors = app?.data.data?.map((item) => (
     <ColorBlock key={item.id} color={item.color} name={item.name} />
   ));
 
